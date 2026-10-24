@@ -1,0 +1,629 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Muhammed Saeed</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;700&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&family=Silkscreen&display=swap">
+<style>
+  /* Layout concept: a pixel-grid portfolio. Asymmetric hero with a drawable 16x16 canvas,
+     left-column section labels, quiet line-bordered cards. */
+  :root {
+    --bg: #F2F4FA;
+    --surface: #FFFFFF;
+    --ink: #101629;
+    --muted: #566080;
+    --line: #D3D9EA;
+    --accent: #2B44E8;
+    --accent-ink: #FFFFFF;
+    --grid: #E3E7F3;
+    --cell: #EAEDF7;
+    --px-coral: #F2584B;
+    --px-amber: #F7B928;
+    --px-mint: #1DB887;
+    --font-display: "Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+    --font-body: "IBM Plex Sans", "Segoe UI", system-ui, sans-serif;
+    --font-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+    --font-pixel: "Silkscreen", "Courier New", monospace;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #0D1121;
+      --surface: #151B31;
+      --ink: #E9EDFB;
+      --muted: #9AA5C9;
+      --line: #2A3354;
+      --accent: #8496FF;
+      --accent-ink: #0D1121;
+      --grid: #161C35;
+      --cell: #1B2240;
+      color-scheme: dark;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #0D1121;
+    --surface: #151B31;
+    --ink: #E9EDFB;
+    --muted: #9AA5C9;
+    --line: #2A3354;
+    --accent: #8496FF;
+    --accent-ink: #0D1121;
+    --grid: #161C35;
+    --cell: #1B2240;
+    color-scheme: dark;
+  }
+
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--font-body);
+    font-size: 16px;
+    line-height: 1.6;
+  }
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0 0 auto;
+    height: env(safe-area-inset-top, 0px);
+    z-index: 10;
+    background: var(--bg);
+  }
+  a { color: var(--accent); text-underline-offset: 3px; }
+  :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  h1, h2, h3, p, ul, dl, dd { margin: 0; }
+  ul { padding: 0; list-style: none; }
+
+  .wrap {
+    max-width: 1120px;
+    margin-inline: auto;
+    padding-left: max(16px, env(safe-area-inset-left, 0px));
+    padding-right: max(16px, env(safe-area-inset-right, 0px));
+  }
+  .label {
+    font-family: var(--font-pixel);
+    font-size: 0.8rem;
+    letter-spacing: 0.08em;
+    color: var(--accent);
+    text-transform: uppercase;
+  }
+  .mono { font-family: var(--font-mono); font-size: 0.8125rem; color: var(--muted); }
+
+  /* Header */
+  header.top {
+    position: sticky;
+    top: env(safe-area-inset-top, 0px);
+    z-index: 5;
+    background: var(--bg);
+    border-bottom: 1px solid var(--line);
+  }
+  .top-inner { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding-block: 12px; }
+  .brand { display: flex; align-items: center; gap: 10px; flex: none; color: var(--ink); text-decoration: none; font-family: var(--font-display); font-weight: 700; font-size: 1.05rem; }
+  .mark { display: grid; grid-template-columns: repeat(2, 9px); gap: 2px; }
+  .mark i { width: 9px; height: 9px; display: block; }
+  .mark i:nth-child(1) { background: var(--accent); }
+  .mark i:nth-child(2) { background: var(--px-coral); }
+  .mark i:nth-child(3) { background: var(--px-amber); }
+  .mark i:nth-child(4) { background: var(--px-mint); }
+  nav.links { display: flex; gap: 20px; min-width: 0; overflow-x: auto; white-space: nowrap; font-size: 0.9rem; }
+  nav.links a { color: var(--muted); text-decoration: none; padding-block: 4px; }
+  nav.links a:hover { color: var(--accent); }
+
+  /* Hero */
+  .hero { position: relative; padding-block: clamp(40px, 7vw, 88px) clamp(48px, 7vw, 96px); overflow: hidden; }
+  .hero::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: linear-gradient(var(--grid) 1px, transparent 1px), linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+    background-size: 24px 24px;
+    -webkit-mask-image: linear-gradient(#000 30%, transparent);
+    mask-image: linear-gradient(#000 30%, transparent);
+    pointer-events: none;
+  }
+  .hero .wrap { position: relative; display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 0.75fr); gap: clamp(32px, 6vw, 72px); align-items: center; }
+  h1 {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(2.7rem, 7.2vw, 4.9rem);
+    line-height: 1;
+    letter-spacing: -0.025em;
+    text-wrap: balance;
+    margin-block: 16px 20px;
+  }
+  .lede { font-size: clamp(1.1rem, 2vw, 1.3rem); line-height: 1.5; max-width: 34em; text-wrap: pretty; }
+  .sub { color: var(--muted); max-width: 36em; margin-top: 14px; }
+  .cta { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 28px; }
+  .btn {
+    display: inline-block;
+    font: 600 0.95rem var(--font-body);
+    padding: 11px 20px;
+    border: 1px solid var(--accent);
+    background: var(--accent);
+    color: var(--accent-ink);
+    text-decoration: none;
+    border-radius: 3px;
+    cursor: pointer;
+  }
+  .btn.alt { background: transparent; color: var(--accent); }
+  .facts { margin-top: 32px; display: grid; gap: 6px; }
+
+  /* Pixel pad */
+  .pad-box { justify-self: end; width: 100%; max-width: 360px; }
+  .pad {
+    display: grid;
+    grid-template-columns: repeat(16, 1fr);
+    gap: 1px;
+    aspect-ratio: 1;
+    width: 100%;
+    background: var(--line);
+    border: 1px solid var(--line);
+    touch-action: none;
+    user-select: none;
+    -webkit-user-select: none;
+    cursor: crosshair;
+  }
+  .px { background: var(--cell); }
+  .px.c1 { background: var(--ink); }
+  .px.c2 { background: var(--px-coral); }
+  .px.c3 { background: var(--px-amber); }
+  .px.c4 { background: var(--px-mint); }
+  .px.c5 { background: var(--accent); }
+  .pad-tools { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-top: 12px; }
+  .sw { width: 28px; height: 28px; border: 1px solid var(--line); border-radius: 2px; padding: 0; cursor: pointer; background: var(--cell); }
+  .sw.c1 { background: var(--ink); }
+  .sw.c2 { background: var(--px-coral); }
+  .sw.c3 { background: var(--px-amber); }
+  .sw.c4 { background: var(--px-mint); }
+  .sw.c5 { background: var(--accent); }
+  .sw[aria-pressed="true"] { outline: 2px solid var(--ink); outline-offset: 2px; }
+  .tiny { font: 500 0.8125rem var(--font-mono); background: transparent; color: var(--muted); border: 1px solid var(--line); border-radius: 2px; padding: 4px 10px; cursor: pointer; }
+  .tiny:hover { color: var(--accent); border-color: var(--accent); }
+  .pad-note { margin-top: 10px; }
+
+  /* Sections */
+  section.block { padding-block: clamp(48px, 7vw, 88px); border-top: 1px solid var(--line); scroll-margin-top: 64px; }
+  .sec { display: grid; grid-template-columns: minmax(0, 200px) minmax(0, 1fr); gap: clamp(24px, 5vw, 64px); }
+  h2 { font-family: var(--font-display); font-weight: 700; font-size: clamp(1.7rem, 3.2vw, 2.2rem); line-height: 1.1; letter-spacing: -0.015em; margin-top: 8px; text-wrap: balance; }
+  .about p { font-size: 1.1rem; max-width: 38em; text-wrap: pretty; }
+  .about p + p { margin-top: 14px; color: var(--muted); font-size: 1rem; }
+
+  /* Projects */
+  .cards { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; }
+  .card { background: var(--surface); border: 1px solid var(--line); border-radius: 4px; padding: 22px; display: flex; flex-direction: column; gap: 14px; min-width: 0; }
+  .card h3 { font-family: var(--font-display); font-weight: 700; font-size: 1.35rem; line-height: 1.2; letter-spacing: -0.01em; }
+  .card .meta { display: flex; flex-wrap: wrap; gap: 4px 12px; }
+  .tags { display: flex; flex-wrap: wrap; gap: 6px; }
+  .tag { font: 500 0.75rem var(--font-mono); color: var(--ink); border: 1px solid var(--line); background: var(--bg); padding: 2px 8px; border-radius: 2px; }
+  .pts { display: grid; gap: 8px; font-size: 0.95rem; }
+  .pts li { position: relative; padding-left: 18px; }
+  .pts li::before { content: ""; position: absolute; left: 0; top: 0.6em; width: 7px; height: 7px; background: var(--accent); }
+  .card .foot { margin-top: auto; padding-top: 4px; font-size: 0.9rem; }
+
+  /* Rows (experience, education, recognition) */
+  .rows { display: grid; }
+  .row { display: grid; grid-template-columns: minmax(0, 170px) minmax(0, 1fr); gap: 8px 28px; padding-block: 22px; border-top: 1px solid var(--line); }
+  .row:first-child { border-top: 0; padding-top: 0; }
+  .row h3 { font-family: var(--font-display); font-weight: 700; font-size: 1.2rem; line-height: 1.25; }
+  .row .where { color: var(--muted); font-size: 0.95rem; margin-bottom: 10px; }
+  .row .score { font-family: var(--font-mono); font-size: 0.875rem; margin-top: 4px; }
+
+  /* Skills */
+  .skills { display: grid; gap: 0; }
+  .skill { display: grid; grid-template-columns: minmax(0, 170px) minmax(0, 1fr); gap: 8px 28px; padding-block: 18px; border-top: 1px solid var(--line); align-items: baseline; }
+  .skill:first-child { border-top: 0; padding-top: 0; }
+
+  /* Contact */
+  .contact-list { display: grid; gap: 22px; }
+  .c-item { display: grid; gap: 6px; }
+  .c-line { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 14px; }
+  .c-val { font-family: var(--font-display); font-weight: 600; font-size: clamp(1.2rem, 3.4vw, 1.8rem); line-height: 1.2; overflow-wrap: anywhere; }
+
+  footer { border-top: 1px solid var(--line); padding-block: 28px; }
+  footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px 24px; }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .btn, .tiny, nav.links a { transition: background-color 0.15s, color 0.15s, border-color 0.15s; }
+    .btn:hover { background: var(--ink); border-color: var(--ink); color: var(--bg); }
+    .btn.alt:hover { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); }
+  }
+
+  @media (max-width: 900px) {
+    .hero .wrap { grid-template-columns: minmax(0, 1fr); }
+    .pad-box { justify-self: start; }
+    .sec { grid-template-columns: minmax(0, 1fr); gap: 20px; }
+  }
+  @media (max-width: 700px) {
+    .cards { grid-template-columns: minmax(0, 1fr); }
+    .row, .skill { grid-template-columns: minmax(0, 1fr); }
+  }
+  @media (max-width: 520px) {
+    .brand span.name { display: none; }
+    .card { padding: 18px; }
+  }
+</style>
+
+<header class="top">
+  <div class="wrap top-inner">
+    <a class="brand" href="#top" aria-label="Muhammed Saeed, back to top">
+      <span class="mark" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+      <span class="name">Muhammed Saeed</span>
+    </a>
+    <nav class="links" aria-label="Sections">
+      <a href="#projects">Projects</a>
+      <a href="#experience">Experience</a>
+      <a href="#skills">Skills</a>
+      <a href="#education">Education</a>
+      <a href="#recognition">Recognition</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+  <section class="hero">
+    <div class="wrap">
+      <div>
+        <p class="label">Computer Engineering · Mumbai</p>
+        <h1>Muhammed Saeed</h1>
+        <p class="lede">I build interactive web apps: a pixel art editor, a music app you play with hand movements, and a real-time multiplayer game.</p>
+        <p class="sub">Computer Engineering student with a foundation in software development, data structures and full-stack web technologies, focused on responsive design and performance.</p>
+        <div class="cta">
+          <a class="btn" href="#projects">See projects</a>
+          <a class="btn alt" href="#contact">Get in touch</a>
+        </div>
+        <ul class="facts mono">
+          <li>B.E. Computer Engineering · Don Bosco Institute of Technology · 2025 – 2028</li>
+          <li>Diploma, Computer Engineering · 93.09% in final year</li>
+          <li>Co-author, IJPREMS Vol. 04, Issue 11 · Nov 2024</li>
+        </ul>
+      </div>
+
+      <div class="pad-box">
+        <div class="pad" id="pad" role="img" aria-label="Sixteen by sixteen pixel canvas. Draw with a mouse or finger."></div>
+        <div class="pad-tools" id="tools">
+          <button class="sw c1" type="button" data-c="1" aria-pressed="true" title="Ink" aria-label="Ink"></button>
+          <button class="sw c2" type="button" data-c="2" aria-pressed="false" title="Coral" aria-label="Coral"></button>
+          <button class="sw c3" type="button" data-c="3" aria-pressed="false" title="Amber" aria-label="Amber"></button>
+          <button class="sw c4" type="button" data-c="4" aria-pressed="false" title="Mint" aria-label="Mint"></button>
+          <button class="sw c5" type="button" data-c="5" aria-pressed="false" title="Blue" aria-label="Blue"></button>
+          <button class="sw c0" type="button" data-c="0" aria-pressed="false" title="Eraser" aria-label="Eraser"></button>
+          <button class="tiny" type="button" id="clear">Clear</button>
+          <button class="tiny" type="button" id="reset">Reset</button>
+        </div>
+        <p class="mono pad-note">16 × 16. Draw something. PixelArt Studio goes up to 64 × 64.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="about">
+    <div class="wrap sec">
+      <div><p class="label">About</p><h2>Turning coursework into things people use</h2></div>
+      <div class="about">
+        <p>I'm a Computer Engineering student in Mumbai. I work across C, C++, Java, Python, JavaScript and PHP, and I'm most at home building web interfaces with React.js, HTML5 and CSS3.</p>
+        <p>My projects take what I learn in class, such as object-oriented design and data structures, and apply it to real products. Two internships and a hackathon have given me practice working in a team and shipping to a deadline.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="projects">
+    <div class="wrap sec">
+      <div><p class="label">Projects</p><h2>Selected work</h2></div>
+      <div class="cards">
+        <article class="card">
+          <div>
+            <h3>PixelArt Studio</h3>
+            <div class="meta mono"><span>2026</span></div>
+          </div>
+          <div class="tags"><span class="tag">React.js</span><span class="tag">Vite</span><span class="tag">JavaScript</span><span class="tag">HTML5</span><span class="tag">CSS3</span><span class="tag">HTML2Canvas</span></div>
+          <ul class="pts">
+            <li>Responsive digital drawing app with a Pixel Editor mode and a Freehand Drawing mode.</li>
+            <li>Seven brush styles, adjustable brush sizes, a color picker, hover preview and touch support on mobile.</li>
+            <li>Unlimited undo and redo, PNG export, customizable grids from 1×1 to 64×64, and fast canvas rendering.</li>
+            <li>Animated interface that holds up on screens from 480px to 1920px and wider.</li>
+          </ul>
+        </article>
+
+        <article class="card">
+          <div>
+            <h3>GameOfLands</h3>
+            <div class="meta mono"><span>2026</span><span>CodeCraft II Hackathon · Atharva University · Team</span></div>
+          </div>
+          <div class="tags"><span class="tag">React.js</span><span class="tag">Vite</span><span class="tag">Node.js</span><span class="tag">Express</span><span class="tag">Socket.io</span><span class="tag">WebSockets</span></div>
+          <ul class="pts">
+            <li>Real-time multiplayer browser game inspired by strategy and territory-conquest play.</li>
+            <li>Synchronized gameplay across players using Socket.io and WebSockets.</li>
+            <li>Responsive game mechanics, player movement, collision detection, a scoring system and live multiplayer communication.</li>
+          </ul>
+          <p class="foot"><a href="https://gameoflands.vercel.app" target="_blank" rel="noopener">Play it live: gameoflands.vercel.app</a></p>
+        </article>
+
+        <article class="card">
+          <div>
+            <h3>Metallica</h3>
+            <div class="meta mono"><span>Jul 2024 – Feb 2025</span><span>Interactive music web app</span></div>
+          </div>
+          <div class="tags"><span class="tag">JavaScript</span><span class="tag">WebGL / Three.js</span><span class="tag">GenAI</span><span class="tag">Web Audio API</span></div>
+          <ul class="pts">
+            <li>Immersive music app with 2D, 3D and motion-based virtual instruments.</li>
+            <li>Hand-movement tracking through the webcam, so users play instruments without touching the keyboard.</li>
+            <li>Generative AI tools that guide beginners, plus a built-in voice and instrument recorder for saving sessions.</li>
+          </ul>
+        </article>
+
+        <article class="card">
+          <div>
+            <h3>Netflix Clone</h3>
+            <div class="meta mono"><span>Jun 2024</span></div>
+          </div>
+          <div class="tags"><span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">Bootstrap</span><span class="tag">JavaScript</span></div>
+          <ul class="pts">
+            <li>Fully responsive front end of the Netflix homepage, built around modern UI and UX principles.</li>
+            <li>Bootstrap layouts for every screen size, with interactivity written in vanilla JavaScript.</li>
+          </ul>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="experience">
+    <div class="wrap sec">
+      <div><p class="label">Experience</p><h2>Internships</h2></div>
+      <div class="rows">
+        <div class="row">
+          <p class="mono">Mar 2026 – May 2026</p>
+          <div>
+            <h3>Software Development Intern</h3>
+            <p class="where">Techinnosphere · Mumbai, Maharashtra</p>
+            <ul class="pts">
+              <li>Contributed to software development projects, building and optimizing application features.</li>
+              <li>Worked with the development team to deliver solutions that met project requirements.</li>
+            </ul>
+          </div>
+        </div>
+        <div class="row">
+          <p class="mono">May 2024 – Jul 2024</p>
+          <div>
+            <h3>Software Development Intern</h3>
+            <p class="where">Heuristic Academy · Mumbai, Maharashtra</p>
+            <ul class="pts">
+              <li>Applied academic technical knowledge to real software problems and improved system workflows.</li>
+              <li>Worked with a professional development team to troubleshoot and optimize codebase features.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="skills">
+    <div class="wrap sec">
+      <div><p class="label">Skills</p><h2>What I work with</h2></div>
+      <div class="skills">
+        <div class="skill">
+          <p class="mono">Languages &amp; frameworks</p>
+          <div class="tags"><span class="tag">C</span><span class="tag">C++</span><span class="tag">Java</span><span class="tag">Python</span><span class="tag">JavaScript</span><span class="tag">HTML5</span><span class="tag">CSS3</span><span class="tag">PHP</span><span class="tag">React.js</span></div>
+        </div>
+        <div class="skill">
+          <p class="mono">Tools &amp; platforms</p>
+          <div class="tags"><span class="tag">Android Studio</span><span class="tag">VS Code</span><span class="tag">Git</span><span class="tag">GitHub</span></div>
+        </div>
+        <div class="skill">
+          <p class="mono">Databases &amp; systems</p>
+          <div class="tags"><span class="tag">SQL</span><span class="tag">SQLite</span><span class="tag">DBMS</span></div>
+        </div>
+        <div class="skill">
+          <p class="mono">Core concepts</p>
+          <div class="tags"><span class="tag">Object-Oriented Programming</span><span class="tag">UI Design</span><span class="tag">Mobile Application Development</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="education">
+    <div class="wrap sec">
+      <div><p class="label">Education</p><h2>Where I've studied</h2></div>
+      <div class="rows">
+        <div class="row">
+          <p class="mono">Sep 2025 – May 2028</p>
+          <div>
+            <h3>Bachelor of Engineering, Computer Engineering</h3>
+            <p class="where">Don Bosco Institute of Technology, Mumbai</p>
+          </div>
+        </div>
+        <div class="row">
+          <p class="mono">Aug 2022 – May 2025</p>
+          <div>
+            <h3>Diploma, Computer Engineering</h3>
+            <p class="where">M. H. Saboo Siddik Polytechnic, Mumbai</p>
+            <p class="score">Final year: 93.09%</p>
+          </div>
+        </div>
+        <div class="row">
+          <p class="mono">Mar 2022</p>
+          <div>
+            <h3>Secondary School Certificate (SSC)</h3>
+            <p class="where">New Habib High School, Mumbai</p>
+            <p class="score">90.80%</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="recognition">
+    <div class="wrap sec">
+      <div><p class="label">Recognition</p><h2>Achievements and publication</h2></div>
+      <div class="rows">
+        <div class="row">
+          <p class="mono">2026</p>
+          <div>
+            <h3>CodeCraft II Hackathon participant</h3>
+            <p class="where">Atharva University</p>
+            <p>Worked in a team to build GameOfLands, a real-time multiplayer browser game with React.js, Node.js, Express and Socket.io.</p>
+          </div>
+        </div>
+        <div class="row">
+          <p class="mono">Web Development Competition</p>
+          <div>
+            <h3>2nd place</h3>
+            <p class="where">Medical web application</p>
+            <p>Designed and built a fully functional, responsive medical web app with HTML, CSS and JavaScript under a strict time limit.</p>
+          </div>
+        </div>
+        <div class="row">
+          <p class="mono">Nov 2024</p>
+          <div>
+            <h3>METALLICA – A REVIEW</h3>
+            <p class="where">International Journal of Peer-Reviewed &amp; Empirical Research (IJPREMS), Vol. 04, Issue 11</p>
+            <p>Co-authored a technical research paper on the architecture of interactive 3D music applications.</p>
+            <p class="foot" style="margin-top:10px;font-size:0.9rem;"><a href="https://doi.org/10.58257/IJPREMS36934" target="_blank" rel="noopener">DOI 10.58257/IJPREMS36934</a></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="contact">
+    <div class="wrap sec">
+      <div><p class="label">Contact</p><h2>Let's talk</h2></div>
+      <div class="contact-list">
+        <p style="max-width:34em;">I'm open to internships and projects where I can build for the web. Email is the quickest way to reach me.</p>
+        <div class="c-item">
+          <span class="mono">Email</span>
+          <div class="c-line">
+            <span class="c-val" id="v-email">muhdsaeed.ai@gmail.com</span>
+            <button class="tiny" type="button" data-copy="v-email">Copy</button>
+            <a href="mailto:muhdsaeed.ai@gmail.com">Open in mail app</a>
+          </div>
+        </div>
+        <div class="c-item">
+          <span class="mono">Phone</span>
+          <div class="c-line">
+            <span class="c-val" id="v-phone">+91 9137665319</span>
+            <button class="tiny" type="button" data-copy="v-phone">Copy</button>
+          </div>
+        </div>
+        <div class="c-item">
+          <span class="mono">Based in</span>
+          <div class="c-line"><span class="c-val">Mumbai, Maharashtra</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span class="mono">© 2026 Muhammed Saeed</span>
+    <a class="mono" href="#top">Back to top</a>
+  </div>
+</footer>
+
+<script>
+(function () {
+  var N = 16;
+  var ART = [
+    "................",
+    "................",
+    "................",
+    "................",
+    ".1.....1..1111..",
+    ".11...11.1....1.",
+    ".1.1.1.1.1......",
+    ".1..1..1..1111..",
+    ".1.....1......1.",
+    ".1.....1......1.",
+    ".1.....1.1....1.",
+    ".1.....1..1111..",
+    "................",
+    ".222.333.444.555",
+    ".222.333.444.555",
+    "................"
+  ];
+  var pad = document.getElementById("pad");
+  var cells = [];
+  var data = [];
+  var color = 1;
+  var drawing = false;
+
+  for (var i = 0; i < N * N; i++) {
+    var d = document.createElement("div");
+    d.className = "px c0";
+    pad.appendChild(d);
+    cells.push(d);
+    data.push(0);
+  }
+
+  function setCell(i, c) {
+    if (data[i] === c) return;
+    data[i] = c;
+    cells[i].className = "px c" + c;
+  }
+  function load(rows) {
+    for (var r = 0; r < N; r++) {
+      for (var c = 0; c < N; c++) {
+        var ch = rows ? rows[r].charAt(c) : ".";
+        setCell(r * N + c, ch === "." ? 0 : Number(ch));
+      }
+    }
+  }
+  function paintAt(e) {
+    var rect = pad.getBoundingClientRect();
+    var x = e.clientX - rect.left - pad.clientLeft;
+    var y = e.clientY - rect.top - pad.clientTop;
+    var col = Math.floor(x / pad.clientWidth * N);
+    var row = Math.floor(y / pad.clientHeight * N);
+    if (col < 0 || row < 0 || col >= N || row >= N) return;
+    setCell(row * N + col, color);
+  }
+
+  pad.addEventListener("pointerdown", function (e) {
+    drawing = true;
+    try { pad.setPointerCapture(e.pointerId); } catch (err) {}
+    paintAt(e);
+    e.preventDefault();
+  });
+  pad.addEventListener("pointermove", function (e) { if (drawing) paintAt(e); });
+  function stop() { drawing = false; }
+  pad.addEventListener("pointerup", stop);
+  pad.addEventListener("pointercancel", stop);
+  pad.addEventListener("lostpointercapture", stop);
+
+  var sw = document.querySelectorAll("#tools .sw");
+  sw.forEach(function (b) {
+    b.addEventListener("click", function () {
+      color = Number(b.getAttribute("data-c"));
+      sw.forEach(function (o) { o.setAttribute("aria-pressed", o === b ? "true" : "false"); });
+    });
+  });
+  document.getElementById("clear").addEventListener("click", function () { load(null); });
+  document.getElementById("reset").addEventListener("click", function () { load(ART); });
+  load(ART);
+
+  document.querySelectorAll("[data-copy]").forEach(function (btn) {
+    btn.addEventListener("click", function () {
+      var el = document.getElementById(btn.getAttribute("data-copy"));
+      var text = el.textContent.trim();
+      var label = btn.textContent;
+      function flash(msg) {
+        btn.textContent = msg;
+        setTimeout(function () { btn.textContent = label; }, 1600);
+      }
+      function fallback() {
+        var range = document.createRange();
+        range.selectNodeContents(el);
+        var sel = window.getSelection();
+        sel.removeAllRanges();
+        sel.addRange(range);
+        flash("Selected");
+      }
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(function () { flash("Copied"); }, fallback);
+      } else {
+        fallback();
+      }
+    });
+  });
+})();
+</script>
+
+</body></html>
